@@ -33,7 +33,7 @@ M.capabilities = require('cmp_nvim_lsp').default_capabilities()
 local servers = {
     'html', 'clangd', 'pyright', 'eslint',
     'vtsls', 'cssls', 'texlab', 'jdtls',
-    'jsonls', 'svelte'
+    'jsonls', 'svelte', 'vala_ls'
 }
 
 for _, lsp in ipairs(servers) do
