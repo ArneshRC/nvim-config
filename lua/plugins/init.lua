@@ -113,6 +113,11 @@ local plugins = {
             'onsails/lspkind.nvim',
             -- Signature Hints
             'ray-x/lsp_signature.nvim',
+            -- Colorful Completion Menu
+            {
+                'xzbdmw/colorful-menu.nvim',
+                opts = {}
+            },
             {
                 -- [LSP] Configuration presets
                 'neovim/nvim-lspconfig',
