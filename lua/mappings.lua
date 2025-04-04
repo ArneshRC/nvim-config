@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+local utils = require('utils')
 
 vim.g.mapleader = ' '
 
@@ -68,7 +69,10 @@ map('n', '<C-l>', '<C-w>l')
 
 -- LSP keybinds
 map('n', 'gd', function() vim.lsp.buf.definition() end)
-map('n', 'K', function() vim.lsp.buf.hover() end)
+map('n', 'K', function()
+    utils.close_floating_window()
+    vim.lsp.buf.hover()
+end)
 map('n', '<leader>rf', function()
     require('conform').format {
         async = true,
