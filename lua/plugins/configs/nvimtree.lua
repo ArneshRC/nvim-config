@@ -28,4 +28,4 @@ M.update_focused_file = {
     update_root = false
 }
 
-require('nvim-tree').setup(M)
+return M

@@ -1,7 +1,5 @@
 local M = {}
 
-local noice = require('noice')
-
 M.presets = { inc_rename = true }
 
 M.lsp = {
@@ -40,4 +38,4 @@ M.messages = {
     view_search = 'virtualtext'
 }
 
-noice.setup(M)
+return M

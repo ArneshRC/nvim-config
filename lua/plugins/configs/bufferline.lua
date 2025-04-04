@@ -93,4 +93,4 @@ M.highlights = {
     },
 }
 
-require('bufferline').setup(M)
+return M
