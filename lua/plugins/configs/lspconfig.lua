@@ -28,7 +28,7 @@ M.on_attach = function(_, bufnr)
     }, bufnr)
 end
 
-M.capabilities = require('cmp_nvim_lsp').default_capabilities()
+M.capabilities = require('blink.cmp').get_lsp_capabilities()
 
 local servers = {
     'html', 'clangd', 'pyright', 'eslint',

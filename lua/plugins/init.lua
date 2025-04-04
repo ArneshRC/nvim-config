@@ -15,33 +15,25 @@ local plugins = {
             {
                 'nvim-tree/nvim-web-devicons',
                 lazy = true,
-                config = function()
-                    require('nvim-web-devicons').setup()
-                end
+                opts = {}
             },
         },
-        config = function()
-            require('plugins.configs.nvimtree')
-        end
+        opts = require('plugins.configs.nvimtree')
     },
     {
         -- Color code highlighting
         'NvChad/nvim-colorizer.lua',
-        config = function()
-            require('colorizer').setup {
-                user_default_options = {
-                    tailwind = true,
-                    mode = 'virtualtext',
-                    virtualtext = '󱓻'
-                }
+        opts = {
+            user_default_options = {
+                tailwind = true,
+                mode = 'virtualtext',
+                virtualtext = '󱓻'
             }
-        end
+        }
     },
     {
         'cameron-wags/rainbow_csv.nvim',
-        config = function()
-            require 'rainbow_csv'.setup()
-        end
+        opts = {}
     },
     {
         -- Improved syntax highlighting
@@ -56,22 +48,18 @@ local plugins = {
         -- Git integration
         'lewis6991/gitsigns.nvim',
         event = { 'BufReadPre', 'BufNewFile' },
-        config = function()
-            require('gitsigns').setup()
-        end
+        opts = {}
     },
     {
         -- Indentation guides
         'lukas-reineke/indent-blankline.nvim',
         event = { 'BufReadPre', 'BufNewFile' },
         main = 'ibl',
-        config = function()
-            require('ibl').setup {
-                indent = {
-                    char = '│'
-                }
+        opts = {
+            indent = {
+                char = '│'
             }
-        end
+        }
     },
     {
         -- Buffer and tab visualization
@@ -83,132 +71,69 @@ local plugins = {
                 require('scope').setup()
             end
         },
-        config = function()
-            require 'plugins.configs.bufferline'
-        end
+        opts = require('plugins.configs.bufferline')
     },
     {
         'ziontee113/syntax-tree-surfer',
         event = 'BufEnter',
-        config = function()
-            require('syntax-tree-surfer').setup()
-        end
+        opts = {}
     },
     {
         -- Move lines with <A-j>/<A-k>
         'echasnovski/mini.move',
         event = 'BufEnter',
         version = false,
-        config = function()
-            require('mini.move').setup()
-        end
+        opts = {}
     },
     {
         -- Remove buffers while keeping layout
         'echasnovski/mini.bufremove',
         event = 'BufEnter',
         version = false,
-        config = function()
-            require('mini.bufremove').setup()
-        end
+        opts = {}
     },
     {
         -- Statusline
         'nvim-lualine/lualine.nvim',
         lazy = false,
-        config = function()
-            require 'plugins.configs.lualine'
-        end
+        opts = require('plugins.configs.lualine')
     },
     {
         -- Package manager for language servers etc.
         'williamboman/mason.nvim',
-        config = function()
-            require('mason').setup()
-        end
+        opts = {}
     },
     {
-        -- [LSP] Configuration presets
-        'neovim/nvim-lspconfig',
-        event = { 'BufReadPre', 'BufNewFile' },
+        -- [LSP] Completion Engine
+        'saghen/blink.cmp',
         dependencies = {
+            -- Snippet Engine
+            'rafamadriz/friendly-snippets',
+            -- LSP Icons
+            'onsails/lspkind.nvim',
+            -- Signature Hints
             'ray-x/lsp_signature.nvim',
             {
-                -- [LSP] Completion engine
-                'hrsh7th/nvim-cmp',
-                event = 'InsertEnter',
-                dependencies = {
-                    'hrsh7th/cmp-buffer',
-                    'hrsh7th/cmp-path',
-                    'hrsh7th/cmp-nvim-lsp',
-                    'hrsh7th/cmp-nvim-lua',
-                    {
-                        'L3MON4D3/LuaSnip',
-                        build = "make install_jsregexp",
-                        config = function()
-                            require("luasnip.loaders.from_vscode").lazy_load()
-                        end,
-                        dependencies = {
-                            'rafamadriz/friendly-snippets',
-                        }
-                    },
-                    'saadparwaiz1/cmp_luasnip',
-                    {
-                        'windwp/nvim-autopairs',
-                        config = function()
-                            require('nvim-autopairs').setup()
-                            local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
-                            local cmp = require 'cmp'
-                            cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
-                        end
-                    },
-                    {
-                        'windwp/nvim-ts-autotag',
-                        dependencies = 'nvim-treesitter/nvim-treesitter',
-                        config = function()
-                            require('nvim-ts-autotag').setup()
-                        end
-
-                    },
-                },
+                -- [LSP] Configuration presets
+                'neovim/nvim-lspconfig',
+                event = { 'BufReadPre', 'BufNewFile' },
                 config = function()
-                    require 'plugins.configs.nvimcmp'
+                    require 'plugins.configs.lspconfig'
                 end
-            },
-            {
-                -- Formatter
-                'stevearc/conform.nvim',
-                event = 'InsertEnter',
-                config = function()
-                    local conform = require('conform')
-                    conform.setup {
-                        formatters_by_ft = {
-                            javascript = { "prettierd" },
-                            typescript = { "prettierd" },
-                            javascriptreact = { "prettierd" },
-                            typescriptreact = { "prettierd" },
-                            svelte = { "prettierd" },
-                            python = { "ruff" },
-                            css = { "prettierd" },
-                            html = { "prettierd" },
-                            json = { "prettierd" },
-                            jsonc = { "prettierd" },
-                            yaml = { "prettierd" },
-                            markdown = { "prettierd" },
-                            graphql = { "prettierd" },
-                            rust = { "rustfmt" }
-                        },
-                    }
-                end
-            },
-            {
-                -- LSP Icons
-                'onsails/lspkind.nvim'
             }
         },
-        config = function()
-            require 'plugins.configs.lspconfig'
-        end
+
+        version = '1.*',
+
+        opts = require('plugins.configs.blinkcmp'),
+        opts_extend = { "sources.default" }
+
+    },
+    {
+        -- Formatter
+        'stevearc/conform.nvim',
+        event = 'InsertEnter',
+        opts = require('plugins.configs.conform')
     },
     {
         -- UI Overhaul
@@ -217,57 +142,39 @@ local plugins = {
             'MunifTanjim/nui.nvim',
             {
                 'rcarriga/nvim-notify',
-                config = function()
-                    require('notify').setup {
-                        timeout = 0
-                    }
-                end
+                opts = {
+                    timeout = 0
+                }
             }
         },
-        config = function()
-            require 'plugins.configs.noice'
-        end
+        opts = require('plugins.configs.noice')
     },
     {
         -- [LSP] Renamer
         'smjonas/inc-rename.nvim',
         event = 'BufEnter',
         dependencies = { 'folke/noice.nvim' },
-        config = function()
-            require('inc_rename').setup()
-        end
+        opts = {}
     },
     {
         -- Lua version of vim-surround
         'kylechui/nvim-surround',
         event = 'VeryLazy',
-        config = function()
-            require('nvim-surround').setup {
-                surrounds = {
-                    ["c"] = {
-                        add = function()
-                            local cmd = require("nvim-surround.config").get_input "Command: "
-                            return { { "\\" .. cmd .. "{" }, { "}" } }
-                        end,
-                    },
-                    ["e"] = {
-                        add = function()
-                            local env = require("nvim-surround.config").get_input "Environment: "
-                            return { { "\\begin{" .. env .. "}" }, { "\\end{" .. env .. "}" } }
-                        end,
-                    },
-                }
-            }
-        end
+        opts = require('plugins.configs.surround')
+    },
+    {
+        'nvim-autopairs',
+        event = 'InsertEnter',
+        opts = {
+            fast_wrap = {}
+        }
     },
     {
         -- Scrollbar
         'lewis6991/satellite.nvim',
-        config = function()
-            require('satellite').setup({
-                current_only = true
-            })
-        end
+        opts = {
+            current_only = true
+        }
     },
     {
         -- Floating terminal
@@ -280,11 +187,9 @@ local plugins = {
         'akinsho/toggleterm.nvim',
         event = 'VeryLazy',
         cmd = { 'ToggleTerm' },
-        config = function()
-            require('toggleterm').setup {
-                shade_terminals = false
-            }
-        end
+        opts = {
+            shade_terminals = false
+        }
     },
     {
         -- Fixed window positioning
@@ -322,31 +227,27 @@ local plugins = {
                 }
             }
         },
-        config = function()
-            require('telescope').setup {
-                extensions = {
-                    zoxide = {
-                        mappings = {
-                            ['<CR>'] = {
-                                action = function(selection)
-                                    local tree = require('nvim-tree.api').tree
-                                    tree.focus()
-                                    tree.change_root(selection.path)
-                                end
-                            }
+        opts = {
+            extensions = {
+                zoxide = {
+                    mappings = {
+                        ['<CR>'] = {
+                            action = function(selection)
+                                local tree = require('nvim-tree.api').tree
+                                tree.focus()
+                                tree.change_root(selection.path)
+                            end
                         }
                     }
                 }
             }
-        end
+        }
     },
     {
         -- Automatic commenting
         'numToStr/Comment.nvim',
         event = 'BufEnter',
-        config = function()
-            require('Comment').setup()
-        end
+        opts = {}
     },
     {
         -- For testing treesitter
@@ -382,9 +283,7 @@ local plugins = {
             'nvim-tree/nvim-web-devicons', -- optional dependency
             'RRethy/nvim-base16',
         },
-        config = function()
-            require('barbecue').setup()
-        end
+        opts = {}
     },
     {
         "luckasRanarison/tree-sitter-hyprlang",
@@ -420,9 +319,7 @@ local plugins = {
     },
     {
         "stevearc/oil.nvim",
-        config = function()
-            require('oil').setup()
-        end
+        opts = {}
     },
     {
         "kmonad/kmonad-vim"
@@ -467,23 +364,6 @@ local plugins = {
             },
         }
     },
-    {
-        "zbirenbaum/copilot-cmp",
-        dependencies = {
-            {
-                "zbirenbaum/copilot.lua",
-                cmd = "Copilot",
-                event = "InsertEnter",
-                opts = {
-                    suggestion = { enabled = false },
-                    panel = { enabled = false },
-                }
-            }
-        },
-        config = function()
-            require("copilot_cmp").setup()
-        end
-    }
 }
 
 require('lazy').setup(plugins)
