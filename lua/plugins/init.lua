@@ -109,8 +109,15 @@ local plugins = {
         dependencies = {
             -- Snippet Engine
             'rafamadriz/friendly-snippets',
-            -- LSP Icons
-            'onsails/lspkind.nvim',
+            {
+                -- LSP Icons
+                'onsails/lspkind.nvim',
+                opts = {
+                    symbol_map = {
+                        Copilot = ''
+                    }
+                }
+            },
             -- Signature Hints
             'ray-x/lsp_signature.nvim',
             {
