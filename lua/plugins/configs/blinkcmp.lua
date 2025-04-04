@@ -31,7 +31,10 @@ M.appearance = {
 
 M.completion = {
     documentation = { auto_show = false },
-    accept = { auto_brackets = { enabled = true } }
+    accept = { auto_brackets = { enabled = true } },
+    ghost_text = {
+        enabled = true
+    }
 }
 
 M.sources = {
