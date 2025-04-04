@@ -113,10 +113,21 @@ local plugins = {
             'onsails/lspkind.nvim',
             -- Signature Hints
             'ray-x/lsp_signature.nvim',
-            -- Colorful Completion Menu
             {
+                -- Colorful Completion Menu
                 'xzbdmw/colorful-menu.nvim',
                 opts = {}
+            },
+            {
+                -- Copilot Completion Source
+                'giuxtaposition/blink-cmp-copilot',
+                dependencies = {
+                    'zbirenbaum/copilot.lua',
+                    opts = {
+                        suggestion = { enabled = false },
+                        panel = { enabled = false },
+                    }
+                }
             },
             {
                 -- [LSP] Configuration presets
