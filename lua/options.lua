@@ -71,6 +71,7 @@ vim.g.tex_flavor = "latex"
 if vim.g.neovide == true then
     opt.guifont = 'JetBrainsMono_NFM:h11'
     vim.g.neovide_cursor_trail_size = 0.2
+    vim.g.neovide_cursor_animation_length = 0.1
     vim.g.neovide_padding_top = 20
     vim.g.neovide_padding_right = 15
     vim.g.neovide_padding_left = 15
