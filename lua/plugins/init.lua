@@ -298,15 +298,12 @@ local plugins = {
         opts = {}
     },
     {
-        'utilyre/barbecue.nvim',
-        name = 'barbecue',
-        version = '*',
+        'Bekaboo/dropbar.nvim',
+        lazy = false,
         dependencies = {
-            'SmiteshP/nvim-navic',
-            'nvim-tree/nvim-web-devicons', -- optional dependency
-            'RRethy/nvim-base16',
-        },
-        opts = {}
+            'nvim-telescope/telescope-fzf-native.nvim',
+            build = 'make'
+        }
     },
     {
         "luckasRanarison/tree-sitter-hyprlang",
