@@ -6,7 +6,7 @@ local function get_floating_window()
     for _, win_id in ipairs(windows) do
         if win_id ~= base_win_id then
             local win_cfg = vim.api.nvim_win_get_config(win_id)
-            if win_cfg.relative == "win" and win_cfg.win == base_win_id then
+            if win_cfg.relative == "win" and win_cfg.focusable and win_cfg.win == base_win_id then
                 return win_id
             end
         end
