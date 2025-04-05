@@ -125,7 +125,10 @@ map('n', '<F9>', '<cmd> FloatermNew --autoclose=0 --title=NeoRunner nr % <CR>')
 map('n', '<F4>', '<cmd> ToggleTerm name=terminal <CR>')
 map('t', '<F4>', '<cmd> ToggleTerm name=terminal <CR>')
 
-map('t', '<C-w>w', '<cmd> wincmd k <CR>')
+-- Dropbar keybinds
+vim.keymap.set('n', '<Leader>;', function () require('dropbar.api').pick() end)
+vim.keymap.set('n', '[;', function () require('dropbar.api').goto_context_start() end)
+vim.keymap.set('n', '];', function () require('dropbar.api').select_next_context() end)
 
 if vim.g.neovide == true then
     map('n', '<C-S-d>', '<cmd> silent !zsh -c "dolphin \\\"%:p:h\\\" > /dev/null 2>&1 & disown" <CR> <CR>')
