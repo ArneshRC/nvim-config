@@ -12,10 +12,6 @@ M.on_attach = function(_, bufnr)
                 [vim.diagnostic.severity.INFO] = ' ',
                 [vim.diagnostic.severity.HINT] = ' 󰌵',
             }
-        },
-        float = {
-            focusable = false,
-            border = 'rounded'
         }
     })
 
