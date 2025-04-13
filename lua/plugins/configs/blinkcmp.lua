@@ -102,6 +102,7 @@ M.sources = {
     },
 }
 
-M.fuzzy = { implementation = "prefer_rust_with_warning" }
+-- Workaround for https://github.com/Saghen/blink.cmp/issues/1516
+M.fuzzy = { implementation = "lua" }
 
 return M
