@@ -391,6 +391,20 @@ local plugins = {
             },
         }
     },
+    {
+        "rest-nvim/rest.nvim",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            opts = function(_, opts)
+                opts.ensure_installed = opts.ensure_installed or {}
+                table.insert(opts.ensure_installed, "http")
+            end,
+        }
+    },
+    {
+        "lewis6991/hover.nvim",
+        opts = require "plugins.configs.hover"
+    }
 }
 
 require('lazy').setup(plugins)

@@ -1,5 +1,4 @@
 local map = vim.keymap.set
-local utils = require('utils')
 
 vim.g.mapleader = ' '
 
@@ -69,10 +68,11 @@ map('n', '<C-l>', '<C-w>l')
 
 -- LSP keybinds
 map('n', 'gd', function() vim.lsp.buf.definition() end)
-map('n', 'K', function()
-    utils.close_floating_window()
-    vim.lsp.buf.hover()
-end)
+map('n', 'K', function() require('hover').hover({
+    providers = { 'LSP' }
+}) end)
+map('n', 'gK', function() require('hover').hover_select() end)
+
 map('n', '<leader>rf', function()
     require('conform').format {
         async = true,
@@ -126,9 +126,9 @@ map('n', '<F4>', '<cmd> ToggleTerm name=terminal <CR>')
 map('t', '<F4>', '<cmd> ToggleTerm name=terminal <CR>')
 
 -- Dropbar keybinds
-vim.keymap.set('n', '<Leader>;', function () require('dropbar.api').pick() end)
-vim.keymap.set('n', '[;', function () require('dropbar.api').goto_context_start() end)
-vim.keymap.set('n', '];', function () require('dropbar.api').select_next_context() end)
+map('n', '<Leader>;', function () require('dropbar.api').pick() end)
+map('n', '[;', function () require('dropbar.api').goto_context_start() end)
+map('n', '];', function () require('dropbar.api').select_next_context() end)
 
 if vim.g.neovide == true then
     map('n', '<C-S-d>', '<cmd> silent !zsh -c "dolphin \\\"%:p:h\\\" > /dev/null 2>&1 & disown" <CR> <CR>')
