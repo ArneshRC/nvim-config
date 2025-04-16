@@ -118,6 +118,10 @@ map('n', '<leader>fz', "<cmd> Telescope zoxide list <CR>", telescope_opts)
 map('n', '<leader>fr', "<cmd> Telescope oldfiles <CR>", telescope_opts)
 map('n', '<leader>fm', "<cmd> Telescope marks <CR>", telescope_opts)
 
+-- Rest stuff
+map('n', '<leader>hr', "<cmd> Rest run <CR>")
+map('n', '<leader>ho', "<cmd> Rest open <CR>")
+
 -- NeoRunner integration
 map('n', '<F9>', '<cmd> FloatermNew --autoclose=0 --title=NeoRunner nr % <CR>')
 
