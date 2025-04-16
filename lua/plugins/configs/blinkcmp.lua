@@ -81,8 +81,28 @@ M.completion = {
     },
 }
 
+local source_priority = {
+    copilot = 5,
+    lsp = 4,
+    path = 3,
+    buffer = 2,
+    snippets = 1,
+}
+
+M.fuzzy = {
+    sorts = {
+        function(a, b)
+            local a_priority = source_priority[a.source_id]
+            local b_priority = source_priority[b.source_id]
+            if a_priority ~= b_priority then return a_priority < b_priority end
+        end,
+        'score',
+        'sort_text'
+    }
+}
+
 M.sources = {
-    default = { 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
+    default = { 'lsp', 'path', 'buffer', 'copilot' },
     providers = {
         copilot = {
             name = "copilot",
