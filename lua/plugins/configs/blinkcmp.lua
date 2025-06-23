@@ -125,4 +125,8 @@ M.sources = {
 -- Workaround for https://github.com/Saghen/blink.cmp/issues/1516
 M.fuzzy = { implementation = "lua" }
 
+M.signature = {
+  enabled = false
+}
+
 return M

@@ -423,6 +423,12 @@ local plugins = {
         "lewis6991/hover.nvim",
         opts = require "plugins.configs.hover"
     },
+    {
+        "m4xshen/hardtime.nvim",
+        lazy = false,
+        dependencies = { "MunifTanjim/nui.nvim" },
+        opts = {},
+    },
 }
 
 require('lazy').setup(plugins)
