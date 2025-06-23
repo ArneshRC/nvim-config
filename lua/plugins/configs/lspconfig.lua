@@ -29,7 +29,8 @@ M.capabilities = require('blink.cmp').get_lsp_capabilities()
 local servers = {
     'html', 'clangd', 'pyright', 'eslint',
     'vtsls', 'cssls', 'texlab', 'jdtls',
-    'jsonls', 'svelte', 'vala_ls'
+    'jsonls', 'svelte', 'vala_ls', 'biome',
+    'astro'
 }
 
 for _, lsp in ipairs(servers) do
@@ -49,6 +50,14 @@ lspconfig.rust_analyzer.setup {
             }
         }
     }
+}
+
+lspconfig.astro.setup {
+  on_attach = M.on_attach,
+  capabilities = M.capabilities,
+  init_options = {
+    typescript = { tsdk = vim.fs.normalize '~/.local/share/nvim/mason/packages/vtsls/node_modules/@vtsls/language-server/node_modules/typescript/lib/', }
+  }
 }
 
 -- lspconfig.textlsp.setup {
@@ -95,7 +104,8 @@ lspconfig.emmet_language_server.setup({
         "css", "ejs", "html",
         "javascript", "javascriptreact",
         "less", "sass", "scss", "svelte",
-        "pug", "typescriptreact", "vue"
+        "pug", "typescriptreact", "vue",
+        "astro"
     },
     init_options = {
         html = {
