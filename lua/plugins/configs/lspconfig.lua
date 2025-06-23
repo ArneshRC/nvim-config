@@ -27,10 +27,9 @@ end
 M.capabilities = require('blink.cmp').get_lsp_capabilities()
 
 local servers = {
-    'html', 'clangd', 'pyright', 'eslint',
-    'vtsls', 'cssls', 'texlab', 'jdtls',
-    'jsonls', 'svelte', 'vala_ls', 'biome',
-    'astro'
+    'html', 'clangd', 'pyright', 'vtsls',
+    'cssls', 'texlab', 'jdtls', 'jsonls',
+    'svelte', 'vala_ls', 'biome', 'astro'
 }
 
 for _, lsp in ipairs(servers) do
