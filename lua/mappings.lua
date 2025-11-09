@@ -134,6 +134,11 @@ map('n', '<Leader>;', function () require('dropbar.api').pick() end)
 map('n', '[;', function () require('dropbar.api').goto_context_start() end)
 map('n', '];', function () require('dropbar.api').select_next_context() end)
 
+-- Leap keybinds
+vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap)')
+vim.keymap.set('n',             'S', '<Plug>(leap-from-window)')
+
+
 if vim.g.neovide == true then
     map('n', '<C-S-d>', '<cmd> silent !zsh -c "dolphin \\\"%:p:h\\\" > /dev/null 2>&1 & disown" <CR> <CR>')
     map('n', '<C-Tab>', '<cmd> tabnext <CR>')

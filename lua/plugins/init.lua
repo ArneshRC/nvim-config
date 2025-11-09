@@ -74,11 +74,6 @@ local plugins = {
         opts = require('plugins.configs.bufferline')
     },
     {
-        'ziontee113/syntax-tree-surfer',
-        event = 'BufEnter',
-        opts = {}
-    },
-    {
         -- Move lines with <A-j>/<A-k>
         'echasnovski/mini.move',
         event = 'BufEnter',
@@ -379,7 +374,7 @@ local plugins = {
     },
     {
         "OXY2DEV/markview.nvim",
-        lazy = false, -- Recommended
+        lazy = true,
         config = function()
             local presets = require("markview.presets").headings;
 
@@ -424,11 +419,9 @@ local plugins = {
         opts = require "plugins.configs.hover"
     },
     {
-        "m4xshen/hardtime.nvim",
-        lazy = false,
-        dependencies = { "MunifTanjim/nui.nvim" },
-        opts = {},
-    },
+        "ggandor/leap.nvim",
+        opts = {}
+    }
 }
 
 require('lazy').setup(plugins)
