@@ -94,7 +94,7 @@ M.fuzzy = {
         function(a, b)
             local a_priority = source_priority[a.source_id]
             local b_priority = source_priority[b.source_id]
-            if a_priority ~= b_priority then return a_priority < b_priority end
+            if a_priority ~= b_priority then return a_priority > b_priority end
         end,
         'score',
         'sort_text'
@@ -121,9 +121,6 @@ M.sources = {
         },
     },
 }
-
--- Workaround for https://github.com/Saghen/blink.cmp/issues/1516
-M.fuzzy = { implementation = "lua" }
 
 M.signature = {
   enabled = false
