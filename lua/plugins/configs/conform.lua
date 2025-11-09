@@ -1,8 +1,9 @@
 M = {}
 
-local web_formatters = { "biome", "biome-check", "biome-organize-imports" }
+local web_formatters = { "biome", "biome-check", "rustywind" }
 
 M.formatters_by_ft = {
+    astro = { "prettier" },
     javascript = web_formatters,
     typescript = web_formatters,
     javascriptreact = web_formatters,
@@ -15,7 +16,8 @@ M.formatters_by_ft = {
     yaml = web_formatters,
     markdown = web_formatters,
     graphql = web_formatters,
-    python = { "ruff" },
+    python = { "ruff", "ruff_format" },
+    tex = { "tex-fmt" },
     rust = { "rustfmt" }
 }
 
