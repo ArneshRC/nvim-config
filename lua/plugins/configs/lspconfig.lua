@@ -1,6 +1,6 @@
 local M = {}
 
-local lspconfig = require('lspconfig')
+local lspconfig = vim.lsp.config
 
 M.on_attach = function(_, bufnr)
     vim.diagnostic.config({
@@ -27,19 +27,20 @@ end
 M.capabilities = require('blink.cmp').get_lsp_capabilities()
 
 local servers = {
-    'html', 'clangd', 'pyright', 'vtsls',
+    'html', 'clangd', 'basedpyright', 'vtsls',
     'cssls', 'texlab', 'jdtls', 'jsonls',
-    'svelte', 'vala_ls', 'biome', 'astro'
+    'svelte', 'vala_ls', 'biome', 'astro',
+    'tailwindcss'
 }
 
 for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup {
+    lspconfig(lsp, {
         on_attach = M.on_attach,
         capabilities = M.capabilities
-    }
+    })
 end
 
-lspconfig.rust_analyzer.setup {
+lspconfig('rust_analyzer', {
     on_attach = M.on_attach,
     capabilities = M.capabilities,
     settings = {
@@ -49,17 +50,17 @@ lspconfig.rust_analyzer.setup {
             }
         }
     }
-}
+})
 
-lspconfig.astro.setup {
+lspconfig('astro', {
   on_attach = M.on_attach,
   capabilities = M.capabilities,
   init_options = {
     typescript = { tsdk = vim.fs.normalize '~/.local/share/nvim/mason/packages/vtsls/node_modules/@vtsls/language-server/node_modules/typescript/lib/', }
   }
-}
+})
 
--- lspconfig.textlsp.setup {
+-- lspconfig('textlsp', {
 --     on_attach = M.on_attach,
 --     capabilities = M.capabilities,
 --     filetypes = { 'markdown', 'txt', 'text', 'tex', 'asciidoc' },
@@ -79,7 +80,7 @@ lspconfig.astro.setup {
 --     }
 -- }
 
-lspconfig.lua_ls.setup {
+lspconfig('lua_ls', {
     on_attach = M.on_attach,
     capabilities = M.capabilities,
     settings = {
@@ -88,15 +89,15 @@ lspconfig.lua_ls.setup {
             telemetry = { enable = false }
         }
     }
-}
+})
 
-lspconfig.bashls.setup {
+lspconfig('bashls', {
     on_attach = M.on_attach,
     capabilities = M.capabilities,
     filetypes = { 'sh', 'bash', 'zsh' }
-}
+})
 
-lspconfig.emmet_language_server.setup({
+lspconfig('emmet_language_server', {
     -- on_attach = on_attach,
     capabilities = M.capabilities,
     filetypes = {
