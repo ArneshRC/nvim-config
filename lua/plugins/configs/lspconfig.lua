@@ -1,6 +1,7 @@
 local M = {}
 
 local lspconfig = vim.lsp.config
+local lspenable = vim.lsp.enable
 
 M.on_attach = function(_, bufnr)
     vim.diagnostic.config({
@@ -26,20 +27,6 @@ end
 
 M.capabilities = require('blink.cmp').get_lsp_capabilities()
 
-local servers = {
-    'html', 'clangd', 'basedpyright', 'vtsls',
-    'cssls', 'texlab', 'jdtls', 'jsonls',
-    'svelte', 'vala_ls', 'biome', 'astro',
-    'tailwindcss'
-}
-
-for _, lsp in ipairs(servers) do
-    lspconfig(lsp, {
-        on_attach = M.on_attach,
-        capabilities = M.capabilities
-    })
-end
-
 lspconfig('rust_analyzer', {
     on_attach = M.on_attach,
     capabilities = M.capabilities,
@@ -59,26 +46,6 @@ lspconfig('astro', {
     typescript = { tsdk = vim.fs.normalize '~/.local/share/nvim/mason/packages/vtsls/node_modules/@vtsls/language-server/node_modules/typescript/lib/', }
   }
 })
-
--- lspconfig('textlsp', {
---     on_attach = M.on_attach,
---     capabilities = M.capabilities,
---     filetypes = { 'markdown', 'txt', 'text', 'tex', 'asciidoc' },
---     settings = {
---         textLSP = {
---             analysers = {
---                 languagetool = {
---                     enabled = true,
---                     check_text = {
---                         on_open = true,
---                         on_save = true,
---                         on_change = false,
---                     }
---                 }
---             }
---         }
---     }
--- }
 
 lspconfig('lua_ls', {
     on_attach = M.on_attach,
@@ -115,3 +82,20 @@ lspconfig('emmet_language_server', {
         },
     }
 })
+
+local servers = {
+    'html', 'clangd', 'basedpyright', 'vtsls',
+    'cssls', 'texlab', 'jdtls', 'jsonls',
+    'svelte', 'vala_ls', 'biome', 'astro',
+    'tailwindcss', 'rust_analyzer', 'lua_ls',
+    'bash_ls', 'emmet_language_server'
+}
+
+for _, lsp in ipairs(servers) do
+    lspconfig(lsp, {
+        on_attach = M.on_attach,
+        capabilities = M.capabilities,
+    })
+    lspenable(lsp)
+end
+

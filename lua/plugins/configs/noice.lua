@@ -5,6 +5,9 @@ M.presets = { inc_rename = true }
 M.lsp = {
     signature = {
         enabled = false
+    },
+    hover = {
+        enabled = false
     }
 }
 

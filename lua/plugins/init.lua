@@ -195,13 +195,6 @@ local plugins = {
         }
     },
     {
-        -- Scrollbar
-        'lewis6991/satellite.nvim',
-        opts = {
-            current_only = true
-        }
-    },
-    {
         -- Floating terminal
         'voldikss/vim-floaterm',
         event = 'VeryLazy',

@@ -22,8 +22,8 @@ end
 -- floating window open in any buffer
 M.show_diagnostics_window = function()
     if M.floating_window_open() then return end
-    require('hover').hover({
-        providers = { 'Diagnostics' }
+    require('hover').open({
+        providers = { 'hover.providers.diagnostic' }
     })
 end
 

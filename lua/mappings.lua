@@ -46,6 +46,9 @@ map('n', '<leader>t<S-Tab>', '<cmd> tabprevious <CR>')
 -- Nvim-tree keybinds
 map('n', '<C-n>', '<cmd> NvimTreeToggle <CR>')
 
+-- Diagnostics
+map('n', '<leader>d', '<cmd> Trouble diagnostics toggle <CR>')
+
 -- Line numbering
 map('n', '<leader>nn', '<cmd> set number! <CR>')
 map('n', '<leader>nr', '<cmd> set relativenumber! <CR>')
@@ -68,10 +71,10 @@ map('n', '<C-l>', '<C-w>l')
 
 -- LSP keybinds
 map('n', 'gd', function() vim.lsp.buf.definition() end)
-map('n', 'K', function() require('hover').hover({
-    providers = { 'LSP' }
+map('n', 'K', function() require('hover').open({
+    providers = { 'hover.providers.lsp' }
 }) end)
-map('n', 'gK', function() require('hover').hover_select() end)
+map('n', 'gK', function() require('hover').select() end)
 
 map('n', '<leader>rf', function()
     require('conform').format {
@@ -90,25 +93,6 @@ map("n", "<A-K>", function()
 	vim.opt.opfunc = "v:lua.STSSwapUpNormal_Dot"
 	return "g@l"
 end, { silent = true, expr = true })
-
-map("n", "<A-J>", function()
-	vim.opt.opfunc = "v:lua.STSSwapDownNormal_Dot"
-	return "g@l"
-end, { silent = true, expr = true })
-
--- Visual Selection from Normal Mode
-map("n", "vx", '<cmd>STSSelectMasterNode<cr>', sts_opts)
-map("n", "vn", '<cmd>STSSelectCurrentNode<cr>', sts_opts)
-
--- Select Nodes in Visual Mode
-map("x", "J", '<cmd>STSSelectNextSiblingNode<cr>', sts_opts)
-map("x", "K", '<cmd>STSSelectPrevSiblingNode<cr>', sts_opts)
-map("x", "H", '<cmd>STSSelectParentNode<cr>', sts_opts)
-map("x", "L", '<cmd>STSSelectChildNode<cr>', sts_opts)
-
--- Swapping Nodes in Visual Mode
-map("x", "<A-J>", '<cmd>STSSwapNextVisual<cr>', sts_opts)
-map("x", "<A-K>", '<cmd>STSSwapPrevVisual<cr>', sts_opts)
 
 -- Telescope stuff
 local telescope_opts = { noremap = true, silent = true }
