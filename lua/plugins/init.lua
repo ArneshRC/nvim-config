@@ -202,7 +202,6 @@ local plugins = {
         dependencies = { 'akinsho/toggleterm.nvim' },
         opts = {
             animate = { enabled = false },
-            wo = { winbar = false },
             bottom = {
                 {
                     ft = 'toggleterm',
