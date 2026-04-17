@@ -134,8 +134,6 @@ local plugins = {
             }
         },
 
-        version = '1.*',
-
         opts = require('plugins.configs.blinkcmp'),
         opts_extend = { "sources.default" }
 
@@ -373,15 +371,6 @@ local plugins = {
                 converter = 'cmd',
                 port = 11235,
             },
-        }
-    },
-    {
-        "rest-nvim/rest.nvim",
-        dependencies = {
-            opts = function(_, opts)
-                opts.ensure_installed = opts.ensure_installed or {}
-                table.insert(opts.ensure_installed, "http")
-            end,
         }
     },
     {
