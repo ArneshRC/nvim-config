@@ -8,9 +8,7 @@ M.options = {
     close_icon = '󰅙',
     offsets = {
         {
-            filetype = "NvimTree",
-            text = "File Explorer",
-            text_align = "center",
+            filetype = "neo-tree",
             separator = true
         }
     }

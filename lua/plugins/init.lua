@@ -9,16 +9,50 @@ local plugins = {
     },
     {
         -- Filesystem tree
-        'nvim-tree/nvim-tree.lua',
-        cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
+        "nvim-neo-tree/neo-tree.nvim",
         dependencies = {
+            "nvim-lua/plenary.nvim",
+            "MunifTanjim/nui.nvim",
+            "nvim-tree/nvim-web-devicons", -- optional, but recommended
             {
-                'nvim-tree/nvim-web-devicons',
-                lazy = true,
-                opts = {}
-            },
+                's1n7ax/nvim-window-picker',
+                name = 'window-picker',
+                event = 'VeryLazy',
+                version = '2.*',
+                config = function()
+                    require 'window-picker'.setup()
+                end,
+            }
         },
-        opts = require('plugins.configs.nvimtree')
+        opts = {
+            window = {
+                width = 30,
+                mappings = {
+                    ["l"] = "open",
+                    ["h"] = "navigate_up",
+                    ["L"] = "set_root"
+                }
+            },
+            event_handlers = {
+                {
+                    event = "neo_tree_window_after_open",
+                    handler = function(args)
+                        if args.position == "left" or args.position == "right" then
+                            vim.cmd.wincmd("=")
+                        end
+                    end
+                },
+                {
+                    event = "neo_tree_window_after_close",
+                    handler = function(args)
+                        if args.position == "left" or args.position == "right" then
+                            vim.cmd.wincmd("=")
+                        end
+                    end
+                }
+            }
+        },
+        lazy = false, -- neo-tree will lazily load itself
     },
     {
         -- Color code highlighting
@@ -44,7 +78,7 @@ local plugins = {
                 -- Default Options
                 ensure_installed = { 'html', 'css', 'typescript', 'javascript', 'markdown', 'rust', 'python', 'haskell', 'gitignore', 'fish', 'bash', 'dockerfile', 'cpp', 'c', 'lua', 'yuck', 'json', 'vala' },
                 auto_install = true, -- if enabled, install missing parsers when editing a new file
-                highlight = true, -- treesitter highlighting is enabled by default
+                highlight = true,    -- treesitter highlighting is enabled by default
             })
         end
     },
@@ -210,7 +244,7 @@ local plugins = {
                 },
             },
             left = {
-                { ft = 'NvimTree' },
+                { ft = 'neo-tree' },
             }
         }
     },
@@ -222,27 +256,9 @@ local plugins = {
             'nvim-lua/plenary.nvim',
             'nvim-lua/popup.nvim',
             {
-                'jvgrootveld/telescope-zoxide',
-                dependencies = {
-                    'nvim-tree/nvim-tree.lua'
-                }
+                'jvgrootveld/telescope-zoxide'
             }
         },
-        opts = {
-            extensions = {
-                zoxide = {
-                    mappings = {
-                        ['<CR>'] = {
-                            action = function(selection)
-                                local tree = require('nvim-tree.api').tree
-                                tree.focus()
-                                tree.change_root(selection.path)
-                            end
-                        }
-                    }
-                }
-            }
-        }
     },
     {
         -- Automatic commenting
@@ -357,10 +373,6 @@ local plugins = {
                 }
             });
         end,
-
-        dependencies = {
-            "nvim-tree/nvim-web-devicons"
-        }
     },
     {
         'tigion/nvim-asciidoc-preview',

@@ -13,16 +13,6 @@ map('n', '<C-f>', '<C-f>zz')
 map('n', '<C-b>', '<C-b>zz')
 map('n', 'n', 'nzz')
 map('n', 'N', 'Nzz')
-map('n', 'cd', function ()
-    local tree = require('nvim-tree.api').tree
-    vim.cmd('cd %:p:h')
-    tree.change_root(vim.fn.getcwd())
-end)
-map('n', 'c.', function ()
-    local tree = require('nvim-tree.api').tree
-    vim.cmd('cd ..')
-    tree.change_root(vim.fn.getcwd())
-end)
 
 -- Allow moving the cursor through wrapped lines with j, k
 -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
@@ -43,8 +33,8 @@ map('n', '<leader>tx', '<cmd> tabclose <CR>')
 map('n', '<leader>t<Tab>', '<cmd> tabnext <CR>')
 map('n', '<leader>t<S-Tab>', '<cmd> tabprevious <CR>')
 
--- Nvim-tree keybinds
-map('n', '<C-n>', '<cmd> NvimTreeToggle <CR>')
+-- Neotree keybinds
+map('n', '<C-n>', '<cmd> Neotree toggle <CR>')
 
 -- Diagnostics
 map('n', '<leader>d', '<cmd> Trouble diagnostics toggle <CR>')
@@ -83,9 +73,6 @@ map('n', '<leader>rf', function()
     }
 end)
 map('n', '<leader>ra', ':IncRename ')
-
--- Syntax Tree Surfer
-local sts_opts = {noremap = true, silent = true}
 
 -- Normal Mode Swapping:
 -- Swap The Master Node relative to the cursor with it's siblings, Dot Repeatable

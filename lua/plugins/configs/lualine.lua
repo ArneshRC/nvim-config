@@ -15,7 +15,7 @@ M.sections = {
 }
 
 M.extensions = {
-    'nvim-tree'
+    'neo-tree'
 }
 
 return M
