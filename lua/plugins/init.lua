@@ -253,11 +253,6 @@ local plugins = {
         opts = {}
     },
     {
-        -- For testing treesitter
-        'nvim-treesitter/playground',
-        cmd = 'TSPlaygroundToggle',
-    },
-    {
         -- For converting colors from one format to another
         'NTBBloodbath/color-converter.nvim',
         event = 'BufEnter',
@@ -305,7 +300,6 @@ local plugins = {
     },
     {
         "luckasRanarison/tree-sitter-hyprlang",
-        dependencies = { "nvim-treesitter/nvim-treesitter" },
         event = 'VeryLazy'
     },
     {
@@ -367,7 +361,6 @@ local plugins = {
         end,
 
         dependencies = {
-            "nvim-treesitter/nvim-treesitter",
             "nvim-tree/nvim-web-devicons"
         }
     },
@@ -385,7 +378,6 @@ local plugins = {
     {
         "rest-nvim/rest.nvim",
         dependencies = {
-            "nvim-treesitter/nvim-treesitter",
             opts = function(_, opts)
                 opts.ensure_installed = opts.ensure_installed or {}
                 table.insert(opts.ensure_installed, "http")
