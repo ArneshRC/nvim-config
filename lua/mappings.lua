@@ -88,6 +88,7 @@ map('n', '<leader>fg', "<cmd> Telescope live_grep <CR>", telescope_opts)
 map('n', '<leader>fz', "<cmd> Telescope zoxide list <CR>", telescope_opts)
 map('n', '<leader>fr', "<cmd> Telescope oldfiles <CR>", telescope_opts)
 map('n', '<leader>fm', "<cmd> Telescope marks <CR>", telescope_opts)
+map('n', '<leader>fo', "<cmd> Telescope buffers <CR>", telescope_opts)
 
 -- Rest stuff
 map('n', '<leader>hr', "<cmd> Rest run <CR>")
