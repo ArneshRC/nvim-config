@@ -275,7 +275,7 @@ local plugins = {
         opts = {}
     },
     {
-        'Bekaboo/dropbar.nvim',
+        'YaQia/dropbar.nvim',
         lazy = false,
         opts = {
             menu = {
