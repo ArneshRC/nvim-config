@@ -121,24 +121,6 @@ local plugins = {
                 opts = {}
             },
             {
-                -- Copilot Completion Source
-                'giuxtaposition/blink-cmp-copilot',
-                dependencies = {
-                    'zbirenbaum/copilot.lua',
-                    opts = {
-                        server_opts_overrides = {
-                            settings = {
-                                telemetry = {
-                                    telemetryLevel = "off",
-                                },
-                            },
-                        },
-                        suggestion = { enabled = false },
-                        panel = { enabled = false },
-                    }
-                }
-            },
-            {
                 -- [LSP] Configuration presets
                 'neovim/nvim-lspconfig',
                 event = { 'BufReadPre', 'BufNewFile' },
@@ -412,8 +394,15 @@ local plugins = {
         opts = require "plugins.configs.hover"
     },
     {
-        "ggandor/leap.nvim",
+        "https://codeberg.org/andyg/leap.nvim",
         opts = {}
+    },
+    {
+        "gruvw/strudel.nvim",
+        build = "/usr/bin/npm i",
+        config = function()
+            require("strudel").setup()
+        end,
     }
 }
 

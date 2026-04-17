@@ -69,7 +69,7 @@ vim.g.tex_flavor = "latex"
 
 -- Neovide-specific configuration
 if vim.g.neovide == true then
-    opt.guifont = 'JetBrainsMono_NFM:h11'
+    opt.guifont = 'JetBrainsMono Nerd Font:h11'
     vim.g.neovide_cursor_trail_size = 0.2
     vim.g.neovide_cursor_animation_length = 0.1
     vim.g.neovide_padding_top = 20
