@@ -403,6 +403,9 @@ local plugins = {
         config = function()
             require("strudel").setup()
         end,
+    },
+    {
+        "folke/zen-mode.nvim",
     }
 }
 
