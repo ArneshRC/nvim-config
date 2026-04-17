@@ -36,12 +36,16 @@ local plugins = {
         opts = {}
     },
     {
-        -- Improved syntax highlighting
-        'nvim-treesitter/nvim-treesitter',
-        build = ':TSUpdate',
-        event = { 'BufReadPre', 'BufNewFile' },
+        -- Syntax highlighting
+        "romus204/tree-sitter-manager.nvim",
+        dependencies = {}, -- tree-sitter CLI must be installed system-wide
         config = function()
-            require 'plugins.configs.treesitter'
+            require("tree-sitter-manager").setup({
+                -- Default Options
+                ensure_installed = { 'html', 'css', 'typescript', 'javascript', 'markdown', 'rust', 'python', 'haskell', 'gitignore', 'fish', 'bash', 'dockerfile', 'cpp', 'c', 'lua', 'yuck', 'json', 'vala' },
+                auto_install = true, -- if enabled, install missing parsers when editing a new file
+                highlight = true, -- treesitter highlighting is enabled by default
+            })
         end
     },
     {
@@ -142,20 +146,20 @@ local plugins = {
         event = 'InsertEnter',
         opts = require('plugins.configs.conform')
     },
-    {
-        -- UI Overhaul
-        'folke/noice.nvim',
-        dependencies = {
-            'MunifTanjim/nui.nvim',
-            {
-                'rcarriga/nvim-notify',
-                opts = {
-                    timeout = 0
-                }
-            }
-        },
-        opts = require('plugins.configs.noice')
-    },
+    -- {
+    --     -- UI Overhaul
+    --     'folke/noice.nvim',
+    --     dependencies = {
+    --         'MunifTanjim/nui.nvim',
+    --         {
+    --             'rcarriga/nvim-notify',
+    --             opts = {
+    --                 timeout = 0
+    --             }
+    --         }
+    --     },
+    --     opts = require('plugins.configs.noice')
+    -- },
     {
         -- [LSP] Renamer
         'smjonas/inc-rename.nvim',
