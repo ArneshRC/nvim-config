@@ -40,11 +40,11 @@ lspconfig('rust_analyzer', {
 })
 
 lspconfig('astro', {
-  on_attach = M.on_attach,
-  capabilities = M.capabilities,
-  init_options = {
-    typescript = { tsdk = vim.fs.normalize '~/.local/share/nvim/mason/packages/vtsls/node_modules/@vtsls/language-server/node_modules/typescript/lib/', }
-  }
+    on_attach = M.on_attach,
+    capabilities = M.capabilities,
+    init_options = {
+        typescript = { tsdk = vim.fs.normalize '~/.local/share/nvim/mason/packages/vtsls/node_modules/@vtsls/language-server/node_modules/typescript/lib/', }
+    }
 })
 
 lspconfig('lua_ls', {
@@ -83,6 +83,20 @@ lspconfig('emmet_language_server', {
     }
 })
 
+lspconfig('basedpyright', {
+    capabilities = M.capabilities,
+    on_attach = M.on_attach,
+    settings = {
+        basedpyright = {
+            analysis = {
+                diagnosticSeverityOverrides = {
+                    reportUnusedCallResult = false
+                }
+            }
+        }
+    }
+})
+
 local servers = {
     'html', 'clangd', 'basedpyright', 'vtsls',
     'cssls', 'texlab', 'jdtls', 'jsonls',
@@ -98,4 +112,3 @@ for _, lsp in ipairs(servers) do
     })
     lspenable(lsp)
 end
-
