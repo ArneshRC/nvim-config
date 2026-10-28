@@ -39,6 +39,9 @@ map('n', '<C-n>', '<cmd> Neotree toggle <CR>')
 -- Diagnostics
 map('n', '<leader>d', '<cmd> Trouble diagnostics toggle <CR>')
 
+-- Undotree
+map('n', '<leader>u', function () require('undotree').toggle() end)
+
 -- Line numbering
 map('n', '<leader>nn', '<cmd> set number! <CR>')
 map('n', '<leader>nr', '<cmd> set relativenumber! <CR>')

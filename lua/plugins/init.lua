@@ -50,7 +50,14 @@ local plugins = {
                         end
                     end
                 }
-            }
+            },
+            filesystem = {
+                use_libuv_file_watcher = true,
+                follow_current_file = {
+                    enabled = true,
+                    leave_dirs_open = false,
+                },
+            },
         },
         lazy = false, -- neo-tree will lazily load itself
     },
@@ -89,9 +96,22 @@ local plugins = {
         opts = {}
     },
     {
+        -- UI Overhaul
+        'folke/noice.nvim',
+        dependencies = {
+            'MunifTanjim/nui.nvim',
+            {
+                'rcarriga/nvim-notify',
+                opts = {
+                    timeout = 0
+                }
+            }
+        },
+        opts = require('plugins.configs.noice')
+    },
+    {
         -- Indentation guides
         'lukas-reineke/indent-blankline.nvim',
-        event = { 'BufReadPre', 'BufNewFile' },
         main = 'ibl',
         opts = {
             indent = {
@@ -139,6 +159,7 @@ local plugins = {
     {
         -- [LSP] Completion Engine
         'saghen/blink.cmp',
+        build = function() require('blink.cmp').build():wait(60000) end,
         dependencies = {
             -- Snippet Engine
             'rafamadriz/friendly-snippets',
@@ -165,7 +186,8 @@ local plugins = {
                 config = function()
                     require 'plugins.configs.lspconfig'
                 end
-            }
+            },
+            'saghen/blink.lib'
         },
 
         opts = require('plugins.configs.blinkcmp'),
@@ -178,20 +200,6 @@ local plugins = {
         event = 'InsertEnter',
         opts = require('plugins.configs.conform')
     },
-    -- {
-    --     -- UI Overhaul
-    --     'folke/noice.nvim',
-    --     dependencies = {
-    --         'MunifTanjim/nui.nvim',
-    --         {
-    --             'rcarriga/nvim-notify',
-    --             opts = {
-    --                 timeout = 0
-    --             }
-    --         }
-    --     },
-    --     opts = require('plugins.configs.noice')
-    -- },
     {
         -- [LSP] Renamer
         'smjonas/inc-rename.nvim',
@@ -287,7 +295,8 @@ local plugins = {
         opts = {}
     },
     {
-        'YaQia/dropbar.nvim',
+        'cubewhy/dropbar.nvim',
+        branch = 'fix-event',
         lazy = false,
         opts = {
             menu = {
@@ -402,6 +411,14 @@ local plugins = {
     },
     {
         "folke/zen-mode.nvim",
+    },
+    {
+        "ouuan/nvim-bigfile",
+        opts = {}
+    },
+    {
+        "jiaoshijie/undotree",
+        opts = { }
     }
 }
 
